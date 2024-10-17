@@ -16,7 +16,11 @@ public class RegisterController {
     private final RegisterService registerService;
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO) {
-        registerService.register(registerDTO);
+        boolean registerResult = registerService.register(registerDTO);
+
+        // 이미 가입된 이메일일 경우
+        if(!registerResult) return ResponseEntity.status(409)
+                .body("already registered email");
 
         return ResponseEntity.ok()
                 .body("register success");

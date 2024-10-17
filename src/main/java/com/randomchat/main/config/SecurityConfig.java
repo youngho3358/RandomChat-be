@@ -1,6 +1,9 @@
 package com.randomchat.main.config;
 
+import com.randomchat.main.jwt.JWTFilter;
+import com.randomchat.main.jwt.JWTUtil;
 import com.randomchat.main.jwt.LoginFilter;
+import com.randomchat.main.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +22,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     // AuthenticationManager 가 인자로 받을 AuthenticationConfiguration 객체 주입
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final JWTUtil jwtUtil;
+    private final UsersRepository usersRepository;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -58,12 +63,15 @@ public class SecurityConfig {
                     // 메모리를 사용하는 H2 데이터베이스의 접속 경로를 오픈
                     // http://localhost:8080/h2-console 경로로 콘솔 접근 가능
                     .requestMatchers("/h2-console/**", "/login", "/register").permitAll()
+//                    .requestMatchers("/mypage").hasRole("USER")
                     .requestMatchers("/admin").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 )
 
+                .addFilterAfter(new JWTFilter(jwtUtil), LoginFilter.class)
+
                 // 커스텀 로그인 필더를 등록
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration)), UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, usersRepository), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

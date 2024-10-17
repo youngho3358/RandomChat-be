@@ -1,6 +1,9 @@
 package com.randomchat.main.jwt;
 
+import com.randomchat.main.domain.users.Users;
+import com.randomchat.main.dto.CustomUserDetails;
 import com.randomchat.main.dto.login.LoginDataJsonMappingDTO;
+import com.randomchat.main.repository.UsersRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,6 +24,8 @@ import java.io.IOException;
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
+    private final JWTUtil jwtUtil;
+    private final UsersRepository usersRepository;
 
     public LoginDataJsonMappingDTO obtainEmailAndPassword(HttpServletRequest request){
         StringBuilder jsonBuilder = new StringBuilder();
@@ -64,9 +69,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String email = loginDataJsonMappingDTO.getEmail();
         String password = loginDataJsonMappingDTO.getPassword();
 
-        System.out.println("email : " + email);
-        System.out.println("password : " + password);
-
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, password, null);
 
         return authenticationManager.authenticate(authToken);
@@ -74,11 +76,18 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
-        System.out.println("success");
+        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+
+        String email = customUserDetails.getUsername();
+        Users user = usersRepository.findByEmail(email).get();
+
+        String token = jwtUtil.createJwt(email, user.getNickname(),user.getRole().name(), user.getGender().name(),60*60*1000L);
+
+        response.addHeader("Authorization", "Bearer " + token);
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        System.out.println("fail");
+        response.setStatus(401);
     }
 }

@@ -36,4 +36,14 @@ public class Users {
 
         return this;
     }
+
+    public Users createUser(String email, String password, String nickname, String role, String gender) {
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.role = Role.valueOf(role);
+        this.gender = Gender.valueOf(gender);
+
+        return this;
+    }
 }
