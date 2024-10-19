@@ -62,8 +62,7 @@ public class SecurityConfig {
                 .authorizeRequests(auth -> auth
                     // 메모리를 사용하는 H2 데이터베이스의 접속 경로를 오픈
                     // http://localhost:8080/h2-console 경로로 콘솔 접근 가능
-                    .requestMatchers("/h2-console/**", "/login", "/register").permitAll()
-//                    .requestMatchers("/mypage").hasRole("USER")
+                    .requestMatchers("/h2-console/**", "/login", "/register/**").permitAll()
                     .requestMatchers("/admin").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 )

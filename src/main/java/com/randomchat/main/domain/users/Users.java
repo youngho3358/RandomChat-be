@@ -2,10 +2,10 @@ package com.randomchat.main.domain.users;
 
 import com.randomchat.main.dto.register.RegisterDTO;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 
 @Entity
-@Data
+@Getter
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
