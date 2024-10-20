@@ -1,4 +1,4 @@
-package com.randomchat.main.config;
+package com.randomchat.main.config.security;
 
 import com.randomchat.main.jwt.JWTFilter;
 import com.randomchat.main.jwt.JWTUtil;

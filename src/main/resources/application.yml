@@ -17,3 +17,14 @@ spring:
     show-sql: true  # SQL ?? ??
   jwt:
     secret: 7JWI64WV7ZWY7IS47JqUIOyggOuKlCDsoITsmIHtmLjsnoXri4jri6Q=
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: youngho3358@gmail.com
+    password: iuortmrjrheuhxud
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

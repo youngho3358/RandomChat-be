@@ -19,10 +19,21 @@ public class EmailVerification {
     @Column
     private String email;
 
+    @Column
+    private String verificationCode;
+
     @Column(nullable = false)
     private boolean isVerified;
 
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime attemptTime;
+
+    public EmailVerification createEmailVerification(String email, String verificationCode) {
+        this.email = email;
+        this.verificationCode = verificationCode;
+        this.isVerified = false;
+
+        return this;
+    }
 }
