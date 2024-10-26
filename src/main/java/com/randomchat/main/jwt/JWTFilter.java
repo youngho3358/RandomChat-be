@@ -52,15 +52,15 @@ public class JWTFilter extends OncePerRequestFilter {
 
         CustomUserDetails customUserDetails = new CustomUserDetails(user);
 
-        System.out.println("<<< auth 토큰 생성 전(SecurityConfig) >>>");
+        System.out.println("<<< auth 토큰 생성 전(JWTFilter.class) >>>");
 
         Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
 
-        System.out.println("권한 정보(JWTFilter) >>> " + customUserDetails.getAuthorities());
+        System.out.println("권한 정보(JWTFilter.class) >>> " + customUserDetails.getAuthorities());
 
         SecurityContextHolder.getContext().setAuthentication(authToken);
 
-        System.out.println("다음 필터 체인으로 넘긴다...");
+        System.out.println("다음 필터 체인으로 넘긴다...(JWTFilter.class)");
 
         filterChain.doFilter(request, response);
     }

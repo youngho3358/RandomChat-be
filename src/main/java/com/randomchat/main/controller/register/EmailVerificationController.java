@@ -2,6 +2,7 @@ package com.randomchat.main.controller.register;
 
 import com.randomchat.main.dto.register.EmailVerificationDTO;
 import com.randomchat.main.service.email.EmailVerificationService;
+import com.randomchat.main.service.register.RegisterService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.io.IOException;
 public class EmailVerificationController {
 
     private final EmailVerificationService emailVerificationService;
+    private final RegisterService registerService;
 
     @PostMapping("/email/verification")
     public ResponseEntity<String> emailVerification(@RequestBody EmailVerificationDTO emailVerificationDTO) throws MessagingException, IOException {
@@ -25,7 +27,7 @@ public class EmailVerificationController {
         String email = emailVerificationDTO.getEmail();
 
         // 1. 이메일 인증이 들어온 이메일 정보로 가입된 계정이 있다면 deny
-        if(emailVerificationService.checkEmailDuplication(email)) return ResponseEntity.status(409).body("이미 가입된 이메일입니다.");
+        if(registerService.checkEmailDuplication(email)) return ResponseEntity.status(409).body("이미 가입된 이메일입니다.");
 
         // 2. 이메일 인증이 들어온 기준 시간으로 부터 5분 내로 DB 내에 5회 인증 요청이 있다면 deny
         // emailVerificationService.esExceededLimit(email);

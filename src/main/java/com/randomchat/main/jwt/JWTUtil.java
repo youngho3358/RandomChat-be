@@ -1,7 +1,5 @@
 package com.randomchat.main.jwt;
 
-import com.randomchat.main.domain.users.Gender;
-import com.randomchat.main.domain.users.Role;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

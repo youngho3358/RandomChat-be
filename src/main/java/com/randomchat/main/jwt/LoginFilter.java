@@ -63,6 +63,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+
         LoginDataJsonMappingDTO loginDataJsonMappingDTO = obtainEmailAndPassword(request);
 
         // 요청에서 email 정보와 비밀번호 정보를 추출
@@ -72,6 +73,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, password, null);
 
         return authenticationManager.authenticate(authToken);
+
+        stackOverFlow 발생
     }
 
     @Override

@@ -30,10 +30,6 @@ public class EmailVerificationService {
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; // 난수에 사용될 문자
 
 
-    public boolean checkEmailDuplication(String email) {
-        return usersRepository.existsByEmail(email);
-    }
-
     public String createCode() {
         StringBuilder stringBuilder = new StringBuilder();
 

@@ -12,12 +12,9 @@ import org.springframework.stereotype.Service;
 public class RegisterService {
     private final UsersRepository usersRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    public boolean register(RegisterDTO registerDTO) {
+    public void register(RegisterDTO registerDTO) {
         String email = registerDTO.getEmail();
         String password = registerDTO.getPassword();
-
-        Boolean isExist = usersRepository.existsByEmail(email);
-        if(isExist) return false;
 
         // 받아온 비밀번호 정보를 암호화
         registerDTO.setPassword(bCryptPasswordEncoder.encode(registerDTO.getPassword()));
@@ -25,6 +22,13 @@ public class RegisterService {
         Users users = new Users();
         Users user = users.createUser(registerDTO);
         usersRepository.save(user);
-        return true;
+    }
+
+    public boolean checkEmailDuplication(String email) {
+        return usersRepository.existsByEmail(email);
+    }
+
+    public boolean checkNicknameDuplication(String nickname) {
+        return usersRepository.existsByNickname(nickname);
     }
 }
