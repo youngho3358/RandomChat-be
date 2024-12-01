@@ -15,6 +15,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -47,6 +52,22 @@ public class SecurityConfig {
 
                 // CSRF 보호 비활성화 (Token 인증 방식에서는 불필요)
                 .csrf(csrf -> csrf.disable())
+
+                // CORS 커스텀을 적용하는 메소드
+                .cors(c -> {
+                    CorsConfigurationSource source = request -> {
+                        CorsConfiguration config = new CorsConfiguration();
+                        config.setAllowedOriginPatterns(List.of("*"));
+                        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
+                        config.setAllowedHeaders(List.of("*"));
+                        config.setExposedHeaders(List.of("*"));
+
+                        UrlBasedCorsConfigurationSource corsSource = new UrlBasedCorsConfigurationSource();
+                        corsSource.registerCorsConfiguration("/**", config);
+                        return config;
+                    };
+                    c.configurationSource(source);
+                })
 
                 // 세션 비활성화
                 .sessionManagement(session -> session

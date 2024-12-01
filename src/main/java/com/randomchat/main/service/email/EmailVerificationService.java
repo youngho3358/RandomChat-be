@@ -52,7 +52,7 @@ public class EmailVerificationService {
 
     public String renderJspToString(String verificationCode) throws IOException {
         // JSP 파일 내용을 String 으로 읽어오기
-        Resource resource = resourceLoader.getResource("classpath:/templates/emailForm.jsp");
+        Resource resource = resourceLoader.getResource("classpath:templates/emailForm.jsp");
         String content = new String(Files.readAllBytes(resource.getFile().toPath()), StandardCharsets.UTF_8);
 
         // 인증 코드를 내용에 삽입하여 리턴
@@ -60,7 +60,6 @@ public class EmailVerificationService {
     }
 
     public void sendEmail(String email, String verificationCode) throws IOException, MessagingException {
-        String jspPath = "/src/main/resources/templates/emailForm.jsp";
         String emailContent = renderJspToString(verificationCode);
 
         MimeMessage message = mailSender.createMimeMessage();
