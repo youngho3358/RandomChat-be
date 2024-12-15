@@ -58,6 +58,10 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
             throw new RuntimeException(e);
         }
 
+        char a = 'a';
+        String b = "zzzz";
+
+
         return loginDataJsonMappingDTO;
     }
 
@@ -74,7 +78,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         return authenticationManager.authenticate(authToken);
 
-//        stackOverFlow 발생;
+//         stackOverFlow 발생;
     }
 
     @Override

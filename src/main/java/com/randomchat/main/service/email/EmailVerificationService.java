@@ -12,9 +12,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.security.SecureRandom;
 import java.util.Random;
 
@@ -52,11 +54,19 @@ public class EmailVerificationService {
 
     public String renderJspToString(String verificationCode) throws IOException {
         // JSP 파일 내용을 String 으로 읽어오기
-        Resource resource = resourceLoader.getResource("classpath:templates/emailForm.jsp");
-        String content = new String(Files.readAllBytes(resource.getFile().toPath()), StandardCharsets.UTF_8);
+        Resource resource = resourceLoader.getResource("classpath:static/emailForm.jsp");
+        StringBuilder content = new StringBuilder();
+
+        try (InputStream inputStream = resource.getInputStream();
+             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append(System.lineSeparator());
+            }
+        }
 
         // 인증 코드를 내용에 삽입하여 리턴
-        return content.replace("${verificationCode}", verificationCode);
+        return content.toString().replace("${verificationCode}", verificationCode);
     }
 
     public void sendEmail(String email, String verificationCode) throws IOException, MessagingException {
