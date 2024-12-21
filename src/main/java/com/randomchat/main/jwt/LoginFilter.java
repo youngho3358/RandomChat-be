@@ -3,7 +3,7 @@ package com.randomchat.main.jwt;
 import com.randomchat.main.domain.users.Users;
 import com.randomchat.main.dto.CustomUserDetails;
 import com.randomchat.main.dto.login.LoginDataJsonMappingDTO;
-import com.randomchat.main.repository.UsersRepository;
+import com.randomchat.main.repository.users.UsersRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

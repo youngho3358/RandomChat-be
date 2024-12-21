@@ -2,7 +2,7 @@ package com.randomchat.main.service.register;
 
 import com.randomchat.main.domain.users.Users;
 import com.randomchat.main.dto.register.RegisterDTO;
-import com.randomchat.main.repository.UsersRepository;
+import com.randomchat.main.repository.users.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -2,7 +2,7 @@ package com.randomchat.main.controller;
 
 import com.randomchat.main.domain.users.Users;
 import com.randomchat.main.jwt.JWTUtil;
-import com.randomchat.main.repository.UsersRepository;
+import com.randomchat.main.repository.users.UsersRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
 import java.util.Optional;
 
 @RestController

@@ -22,6 +22,15 @@ public class JWTFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
+        // 토큰에 대한 정보가 필요 없는 부분은 토큰 검증 과정을 스킵
+        String path = request.getRequestURI();
+        if (path.startsWith("/chat") || path.startsWith("/room") || path.startsWith("/send") || path.startsWith("/socket")
+            || path.startsWith("/register")) {
+            filterChain.doFilter(request, response); // 필터 건너뛰기
+            return;
+        }
+
         String authorization = request.getHeader("Authorization");
         System.out.println("토큰 정보 >>> " + authorization);
 

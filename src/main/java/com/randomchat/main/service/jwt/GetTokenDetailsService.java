@@ -1,7 +1,7 @@
 package com.randomchat.main.service.jwt;
 
 import com.randomchat.main.domain.users.Users;
-import com.randomchat.main.repository.UsersRepository;
+import com.randomchat.main.repository.users.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

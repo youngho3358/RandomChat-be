@@ -1,8 +1,8 @@
 package com.randomchat.main.service.email;
 
 import com.randomchat.main.domain.email.EmailVerification;
-import com.randomchat.main.repository.EmailVerificationRepository;
-import com.randomchat.main.repository.UsersRepository;
+import com.randomchat.main.repository.email.EmailVerificationRepository;
+import com.randomchat.main.repository.users.UsersRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;

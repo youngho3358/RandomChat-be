@@ -1,4 +1,4 @@
-package com.randomchat.main.repository;
+package com.randomchat.main.repository.users;
 
 import com.randomchat.main.domain.users.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
