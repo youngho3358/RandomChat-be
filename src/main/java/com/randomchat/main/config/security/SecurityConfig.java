@@ -84,7 +84,7 @@ public class SecurityConfig {
                     // 메모리를 사용하는 H2 데이터베이스의 접속 경로를 오픈
                     // http://localhost:8080/h2-console 경로로 콘솔 접근 가능
                     .requestMatchers("/h2-console/**", "/login", "/register/**").permitAll()
-                    .requestMatchers("/chat/**", "/room/**", "/send/**").permitAll() // 채팅 관련 엔드포인트 접속 허용 설정
+                    .requestMatchers("/chat/**", "/room/**", "/send/**", "/enter/**").permitAll() // 채팅 관련 엔드포인트 접속 허용 설정
                     .requestMatchers("/admin").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 )

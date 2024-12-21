@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/chat")
+@RequestMapping("/enter")
 public class ChatController {
 
     private final MatchingService matchingService;
