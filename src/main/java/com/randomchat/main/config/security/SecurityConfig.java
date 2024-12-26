@@ -4,6 +4,7 @@ import com.randomchat.main.jwt.JWTFilter;
 import com.randomchat.main.jwt.JWTUtil;
 import com.randomchat.main.jwt.LoginFilter;
 import com.randomchat.main.repository.users.UsersRepository;
+import com.randomchat.main.service.jwt.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +30,8 @@ public class SecurityConfig {
     private final AuthenticationConfiguration authenticationConfiguration;
     private final JWTUtil jwtUtil;
     private final UsersRepository usersRepository;
+    private final CustomUserDetailsService customUserDetailsService;
+
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -91,7 +94,7 @@ public class SecurityConfig {
 
                 .addFilterAfter(new JWTFilter(jwtUtil), LoginFilter.class)
 
-                // 커스텀 로그인 필더를 등록
+                // 커스텀 로그인 필터를 등록
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, usersRepository), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

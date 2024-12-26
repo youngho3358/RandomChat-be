@@ -1,5 +1,6 @@
 package com.randomchat.main.jwt;
 
+import com.randomchat.main.config.security.SecurityConfig;
 import com.randomchat.main.domain.users.Users;
 import com.randomchat.main.dto.CustomUserDetails;
 import com.randomchat.main.dto.login.LoginDataJsonMappingDTO;
@@ -58,10 +59,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
             throw new RuntimeException(e);
         }
 
-        char a = 'a';
-        String b = "zzzz";
-
-
         return loginDataJsonMappingDTO;
     }
 
@@ -74,15 +71,19 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String email = loginDataJsonMappingDTO.getEmail();
         String password = loginDataJsonMappingDTO.getPassword();
 
+        System.out.println("Authentication Manager Class >> " + authenticationManager.getClass());
+
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, password, null);
 
         return authenticationManager.authenticate(authToken);
 
-//         stackOverFlow 발생;
     }
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
+
+        System.out.println("successfulAuthentication 메소드 실행");
+
         CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
 
         String email = customUserDetails.getUsername();
@@ -95,6 +96,9 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+
+        System.out.println("unsuccessfulAuthentication 메소드 실행");
+
         response.setStatus(401);
     }
 }

@@ -32,7 +32,6 @@ public class JWTFilter extends OncePerRequestFilter {
         }
 
         String authorization = request.getHeader("Authorization");
-        System.out.println("토큰 정보 >>> " + authorization);
 
         if(authorization == null || !authorization.startsWith("Bearer ")) {
             System.out.println("토큰 정보가 비었습니다.");
