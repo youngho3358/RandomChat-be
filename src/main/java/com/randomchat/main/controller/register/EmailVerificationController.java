@@ -30,7 +30,7 @@ public class EmailVerificationController {
         if(registerService.checkEmailDuplication(email)) return ResponseEntity.status(409).body("이미 가입된 이메일입니다.");
 
         // 2. 이메일 인증이 들어온 기준 시간으로 부터 5분 내로 DB 내에 5회 인증 요청이 있다면 deny
-        // emailVerificationService.esExceededLimit(email);
+        if(emailVerificationService.esExceededLimit(email)) return ResponseEntity.status(429).body("5분 내 요청 횟수가 초과되었습니다.");
 
         // 3. 이메일 인증용 난수 생성
         String verificationCode = emailVerificationService.createCode();

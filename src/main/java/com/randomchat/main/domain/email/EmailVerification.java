@@ -5,13 +5,21 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class EmailVerification {
+    public EmailVerification(String email, String verificationCode) {
+        this.email = email;
+        this.verificationCode = verificationCode;
+        this.isVerified = false;
+    }
+
     @Id
     @GeneratedValue
     private Long id;
@@ -29,11 +37,11 @@ public class EmailVerification {
     @Column(nullable = false)
     private LocalDateTime attemptTime;
 
-    public EmailVerification createEmailVerification(String email, String verificationCode) {
-        this.email = email;
-        this.verificationCode = verificationCode;
-        this.isVerified = false;
-
-        return this;
-    }
+//    public EmailVerification createEmailVerification(String email, String verificationCode) {
+//        this.email = email;
+//        this.verificationCode = verificationCode;
+//        this.isVerified = false;
+//
+//        return this;
+//    }
 }

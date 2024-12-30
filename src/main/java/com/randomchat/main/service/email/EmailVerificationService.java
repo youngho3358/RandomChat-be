@@ -47,9 +47,9 @@ public class EmailVerificationService {
     }
 
     public void saveEmailVerification(String email, String verificationCode) {
-        EmailVerification emailVerification = new EmailVerification();
-        EmailVerification createEmailVerification = emailVerification.createEmailVerification(email, verificationCode);
-        emailVerificationRepository.save(createEmailVerification);
+        EmailVerification emailVerification = new EmailVerification(email, verificationCode);
+
+        emailVerificationRepository.save(emailVerification);
     }
 
     public String renderJspToString(String verificationCode) throws IOException {
@@ -81,5 +81,12 @@ public class EmailVerificationService {
         helper.setFrom("youngho3358@gmail.com");
 
         mailSender.send(message);
+    }
+
+    public boolean esExceededLimit(String email) {
+        // 이메일 인증 시도 횟수가 5분 내에 5회 이상 요청되었다면 true 반환
+        int countRecentAttempts = emailVerificationRepository.countRecentAttempts(email);
+
+        return countRecentAttempts >= 5;
     }
 }
