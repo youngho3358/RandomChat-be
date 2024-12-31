@@ -17,13 +17,16 @@ public class RegisterController {
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO) {
 
-        // 1. 최종 검증 코드 필요 ( 이메일 중복 여부 체크, 인증 여부 체크 ) - 중복 시 409 코드 리턴, 미인증시 401 코드 리턴
+        // 1. 최종 검증 코드 필요 ( 이메일 중복 여부 체크 ) - 중복 시 409 코드 리턴
         if(registerService.checkEmailDuplication(registerDTO.getEmail())) return ResponseEntity.status(409).body("이미 가입된 이메일입니다.");
 
-        // 2. 최종 검증 코드 필요 ( 닉네임 중복 여부 체크 ) - 409 코드 리턴 - 중복 시 409 코드 리턴
+        // 2. 최종 검증 코드 필요 ( 닉네임 중복 여부 체크 ) - 중복 시 409 코드 리턴
         if(registerService.checkNicknameDuplication(registerDTO.getNickname())) return ResponseEntity.status(409).body("이미 가입된 닉네임입니다.");
 
-        // 3. 최종 회원가입 로직 실행 ( DB insert )
+        // 3. 최종 검증 코드 필요 ( 이메일 인증 여부 체크 ) - 미인증 시 401 코드 리턴
+        if(registerService.checkEmailVerification(registerDTO.getEmail())) return ResponseEntity.status(401).body("이메일이 인증되지 않았습니다.");
+
+        // 4. 최종 회원가입 로직 실행 ( DB insert )
         registerService.register(registerDTO);
 
         return ResponseEntity.ok()

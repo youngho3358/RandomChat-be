@@ -51,6 +51,9 @@ dependencies {
 
 	// Websocket 의존성 추가
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+	// thymeleaf 의존성 추가
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
 
 tasks.named('test') {

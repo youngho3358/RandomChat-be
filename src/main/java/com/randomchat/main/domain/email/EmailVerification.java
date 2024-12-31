@@ -37,11 +37,9 @@ public class EmailVerification {
     @Column(nullable = false)
     private LocalDateTime attemptTime;
 
-//    public EmailVerification createEmailVerification(String email, String verificationCode) {
-//        this.email = email;
-//        this.verificationCode = verificationCode;
-//        this.isVerified = false;
-//
-//        return this;
-//    }
+    public EmailVerification changeIsVerified() {
+        this.isVerified = true;
+
+        return this;
+    }
 }

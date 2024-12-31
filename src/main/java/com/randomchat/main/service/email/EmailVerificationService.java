@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -88,5 +89,22 @@ public class EmailVerificationService {
         int countRecentAttempts = emailVerificationRepository.countRecentAttempts(email);
 
         return countRecentAttempts >= 5;
+    }
+
+    public boolean compareVerificationCode(String email, String verificationCode) {
+        Optional<EmailVerification> recentVerification = emailVerificationRepository.findFirstByEmailOrderByIdDesc(email);
+
+        // 이메일 인증 요청이 비어있는 경우 Controller 로 false 반환
+        if(recentVerification.isEmpty()) return false;
+
+        // 이메일 인증 코드가 DB 상 데이터와 일치하는 경우 isVerified 항목을 true 로 변경하여 저장한 뒤 Controller 로 true 반환
+        if(recentVerification.get().getVerificationCode().equals(verificationCode)){
+            EmailVerification successEmailVerification = recentVerification.get().changeIsVerified();
+            emailVerificationRepository.save(successEmailVerification);
+            return true;
+        }else {
+            // 코드가 일치하지 않는 경우 Controller 로 false 반환
+            return false;
+        }
     }
 }
