@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    color: #333333;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.header {
+    background-color: #007bff;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.user-stats {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+}
+
+.nav {
+    margin-bottom: 1rem;
+}
+
+.nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    background-color: #0056b3;
+    transition: background-color 0.3s ease;
+    position: relative; /* 드롭다운 메뉴를 올바르게 배치하기 위한 설정 */
+}
+
+.nav-item:hover {
+    background-color: #003d82;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+    list-style: none;
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.dropdown:hover .dropdown-menu li {
+    display: block; /* 마우스를 올릴 때만 표시 */
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li {
+    display: none;
+    text-align: center;
+}
+
+.dropdown-menu a {
+    text-decoration: none;
+    color: #333333;
+    display: block;
+    padding: 0.5rem 1rem;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f5f7fa;
+}
+
+.main-content {
+    text-align: center;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

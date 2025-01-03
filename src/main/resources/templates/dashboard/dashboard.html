@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard/dashboard.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- 상단 헤더 -->
+        <header class="header">
+            <h1>Admin Dashboard</h1>
+            <div class="user-stats">
+                <span>실시간 랜덤채팅 접속 유저 수: <strong id="user-count">123</strong></span>
+            </div>
+        </header>
+
+        <!-- 상단 네비게이션 -->
+        <nav class="nav">
+            <ul>
+                <li class="dropdown">
+                    <a href="#" class="nav-item">회원관리</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" id="add-member">회원 추가</a></li>
+                        <li><a href="#" id="delete-member">회원 삭제</a></li>
+                        <li><a href="#" id="search-member">회원 검색</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 메인 콘텐츠 -->
+        <main class="main-content">
+            <h2>Welcome, Admin</h2>
+            <p>대시보드에서 회원을 관리하고 실시간 유저 정보를 확인하세요.</p>
+        </main>
+    </div>
+
+    <script th:src="@{/js/common/verificationJWT.js}"></script>
+    <script th:src="@{/js/dashboard/dashboard.js}"></script>
+</body>
+</html>

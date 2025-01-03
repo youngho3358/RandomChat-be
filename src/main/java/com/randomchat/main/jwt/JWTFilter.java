@@ -56,6 +56,7 @@ public class JWTFilter extends OncePerRequestFilter {
         String gender = jwtUtil.getGender(token);
 
         Users userEntity = new Users();
+
         Users user = userEntity.createUser(email, "temppassword", nickname, role, gender);
 
         CustomUserDetails customUserDetails = new CustomUserDetails(user);

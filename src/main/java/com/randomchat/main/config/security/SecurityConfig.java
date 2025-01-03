@@ -88,8 +88,9 @@ public class SecurityConfig {
                     // http://localhost:8080/h2-console 경로로 콘솔 접근 가능
                     .requestMatchers("/h2-console/**", "/login", "/register/**").permitAll()
                     .requestMatchers("/chat/**", "/room/**", "/send/**", "/enter/**").permitAll() // 채팅 관련 엔드포인트 접속 허용 설정
-                    .requestMatchers("/admin/login", "/css/**").permitAll() // 백오피스 관련 엔드포인트 접속 허용
-                    .requestMatchers("/admin").hasRole("ADMIN")
+                    .requestMatchers("/admin/login", "/css/**", "/js/**").permitAll() // 백오피스 로그인 관련 엔드포인트 접속 허용
+                    .requestMatchers("/admin/dashboard/**").permitAll() // 백오피스 하위 기능 관련 엔드포인트 접속 허용
+                    .requestMatchers("/verification/jwt").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 )
 

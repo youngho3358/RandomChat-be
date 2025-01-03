@@ -27,6 +27,16 @@ public class Users {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    public Users createAdmin(String email, String password, String nickname) {
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+        this.role = Role.valueOf("ADMIN");
+        this.gender = Gender.MALE;
+
+        return this;
+    }
+
     public Users createUser(RegisterDTO registerDTO) {
         this.email = registerDTO.getEmail();
         this.password = registerDTO.getPassword();
