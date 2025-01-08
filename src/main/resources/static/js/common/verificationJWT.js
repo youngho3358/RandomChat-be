@@ -3,7 +3,7 @@ const token = localStorage.getItem("jwtToken");
 
 window.onload = async () => {
     try {
-            const response = await fetch("http://localhost:8080/verification/jwt", {
+            const response = await fetch("https://api.random-chat.site/verification/jwt", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json", // 요청 본문이 JSON 형식임을 명시

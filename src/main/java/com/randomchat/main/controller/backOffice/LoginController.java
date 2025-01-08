@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +33,7 @@ public class LoginController {
         Users user = adminLoginService.adminLogin(username, password);
 
         if(user != null) {
-            // jwt 생성하여 반환해야 함
+            // jwt 생성하여 반환
             String jwtToken = jwtUtil.createJwt(user.getEmail(), user.getNickname(), user.getRole().name(), user.getGender().name(), 60*60*1000L);
             response.addHeader("Authorization", "Bearer " + jwtToken);
 
