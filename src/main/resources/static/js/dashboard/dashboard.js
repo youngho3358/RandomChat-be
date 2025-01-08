@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+
     // user-count 요소 선택
     const userCountElement = document.getElementById("user-count");
 
@@ -31,6 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // 페이지 로드 시 호출
     fetchUserCount();
 
-    // 필요하면 주기적으로 갱신 (선택 사항)
-    setInterval(fetchUserCount, 2000); // 2초마다 갱신
+    // 2초마다 갱신
+    setInterval(fetchUserCount, 2000);
 });
