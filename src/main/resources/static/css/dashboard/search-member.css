@@ -1,0 +1,53 @@
+.table-response {
+    /* 테이블 반응형 세팅 */
+    width: 100%
+    overflow-x: auto; /* 가로 스크롤 활성화 */
+    overflow: auto;
+    -webkit-overflow-scrolling: touch; /* 모바일에서 부드러운 스크롤 */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+#user-table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#user-table th {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid black;
+    text-align: center;
+    padding: 0.2rem 3rem;
+    font-size: 1.0rem;
+}
+
+#user-table td {
+    border: 1px solid black;
+    text-align: center;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    background-color: #f5f7fa;
+}
+
+#user-table td button {
+    text-decoration: none;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 0.2rem 0.3rem;
+    text-align: center;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+#user-table td button:hover {
+    background-color: #003d82;
+}

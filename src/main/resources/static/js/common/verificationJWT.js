@@ -15,9 +15,13 @@ window.onload = async () => {
 
         } else {
             alert("관리자 계정으로 로그인이 필요합니다.");
-            window.location.href = "/admin/login"; // 대시보드로 리디렉션
+            window.location.href = "/admin/login"; // 로그인 페이지로 리디렉션
         }
     } catch (error) {
         console.error("Error during login:", error);
+
+        // 토큰 검증 에러 시 로그인 페이지로 돌려놓는 작업
+         alert("토큰 정보 검증이 실패하였습니다. 관리자에게 문의 바랍니다.");
+         window.location.href = "/admin/login"; // 로그인 페이지로 리디렉션
     }
 }

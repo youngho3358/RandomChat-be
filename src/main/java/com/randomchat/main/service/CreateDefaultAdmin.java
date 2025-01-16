@@ -30,4 +30,13 @@ public class CreateDefaultAdmin {
         usersRepository.save(admin);
     }
 
+//    @PostConstruct
+//    public void testCreateUsers() {
+//        for(int i=0; i<100000; i++) {
+//           Users user = new Users();
+//            Users testUser = user.createUser("a" + i, "a" + i, "a" + i, "USER", "MALE");
+//            usersRepository.save(testUser);
+//        }
+//    }
+
 }

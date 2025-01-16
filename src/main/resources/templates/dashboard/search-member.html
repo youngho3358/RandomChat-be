@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/dashboard/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard/search-member.css}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -40,12 +41,41 @@
 
         <!-- 메인 콘텐츠 -->
         <main class="main-content">
-            <h2>관리자 전용 페이지입니다.</h2>
-            <p>대시보드에서 회원을 관리해보세요.</p>
+            <h1>회원 검색 기능입니다.</h1>
+            <p>총 회원 수: <span id="totalUsersCount">집계 중...</span></p>
+
+            <!-- 검색 기능 -->
+            <div class="search-container">
+                <label for="searchCriteria">검색 기준:</label>
+                <select id="searchCriteria">
+                    <option value="email">이메일</option>
+                    <option value="nickname">닉네임</option>
+                </select>
+                <input type="text" id="searchInput" placeholder="검색어를 입력하세요.">
+                <button id="searchButton">검색</button>
+            </div>
+
+            <div class="table-response">
+                <table id="user-table">
+                    <thead>
+                        <tr>
+                            <th>이메일</th>
+                            <th>닉네임</th>
+                            <th>성별</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 유저 데이터 여기에 추가 -->
+                    </tbody>
+                </table>
+            </div>
+
         </main>
     </div>
 
     <script th:src="@{/js/common/verificationJWT.js}"></script>
     <script th:src="@{/js/dashboard/dashboard.js}"></script>
+    <script th:src="@{/js/dashboard/search-member.js}"></script>
 </body>
 </html>
