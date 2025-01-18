@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,6 +34,16 @@ public class SearchMemberService {
             return true;
         }else {
             return false;
+        }
+    }
+
+    public List<UserListDTO> searchSpecificMember(String criteria, String inputData) {
+        if(criteria.equals("nickname")) {
+            return usersRepository.findSpecificUserByNickname(inputData);
+        } else if(criteria.equals("email")) {
+            return usersRepository.findSpecificUserByEmail(inputData);
+        } else {
+            throw new IllegalArgumentException("Invalid search criteria: " + criteria);
         }
     }
 }

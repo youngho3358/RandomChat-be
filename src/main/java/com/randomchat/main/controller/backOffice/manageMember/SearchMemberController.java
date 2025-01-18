@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -55,6 +56,25 @@ public class SearchMemberController {
             return ResponseEntity.ok("회원 삭제 성공");
         }
         return ResponseEntity.status(404).body("회원이 존재하지 않습니다.");
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("admin/dashboard/search/member")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> searchSpecificMember(@RequestBody Map<String, String> searchSpecificMemberBody) {
+        // 응답할 Map 객체 생성
+        Map<String, Object> data = new HashMap<>();
+
+        // 검색 기준 ( email, nickname )
+        String criteria = searchSpecificMemberBody.get("criteria");
+        // 검색 값
+        String inputData = searchSpecificMemberBody.get("inputData");
+
+        List<UserListDTO> userList = searchMemberService.searchSpecificMember(criteria, inputData);
+
+        data.put("userList", userList);
+
+        return ResponseEntity.ok(data);
     }
 
 }

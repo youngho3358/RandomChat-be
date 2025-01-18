@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 return response.json(); // JSON 형식으로 응답 읽기
             })
             .then(data => {
-                console.log("data >> " + data);
-
                 // 데이터가 유효하다면 업데이트
                 if (data && data.count !== undefined) {
                     userCountElement.textContent = data.count;
