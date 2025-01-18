@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // 총 유저수를 나타내는 span 태그
     const totalUserCount = document.getElementById("totalUserCount");
+    // 검색어 입력 input 태그
+    const searchInput = document.getElementById("searchInput")
     // 검색 버튼
     const searchButton = document.getElementById("searchButton");
     // 검색 기준
@@ -14,6 +16,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     try {
         // 초기 유저 테이블 세팅
         await fetchAndRenderUsers();
+
+        // 검색 창에서 엔터 키 입력 시 검색 버튼 이벤트 발동
+        searchInput.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') { // 엔터 키인지 확인
+                event.preventDefault(); // 기본 엔터 동작(폼 제출)을 방지
+                searchButton.click();   // 버튼 클릭 이벤트 실행
+            }
+        });
 
         // 검색 버튼 이벤트 추가
         searchButton.addEventListener('click', async function() {
